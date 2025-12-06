@@ -146,7 +146,7 @@ const MultiSelect: FC<IMultiSelectProps> = ({
         </div>
       </div>
 
-      {error && <p className="multi-select__error">{error}</p>}
+      {error && !isOpen && <p className="multi-select__error">{error}</p>}
 
       {isOpen && (
         <MultiSelectDropDown

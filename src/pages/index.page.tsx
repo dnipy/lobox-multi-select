@@ -1,5 +1,6 @@
-import { MultiSelect } from "@Shared";
+import { MultiSelect, type IOption } from "@Shared";
 import "./index.page.scss";
+import { useState } from "react";
 
 const options = [
   { label: "Education 🎓", value: "edu" },
@@ -10,6 +11,7 @@ const options = [
 ];
 
 export default function IndexPage() {
+  const [selected, setSelected] = useState<IOption[]>([]);
   return (
     <div className="showcase">
       <div className="showcase__container">
@@ -42,9 +44,15 @@ export default function IndexPage() {
         <div className="showcase__item">
           <label>Error State</label>
           <MultiSelect
+            value={selected}
             label="Error Example"
             options={options}
-            error="You must choose at least 1 option"
+            onChange={(opts) => setSelected(opts)}
+            error={
+              selected.length < 1
+                ? "You must choose at least 1 option"
+                : undefined
+            }
           />
         </div>
 
