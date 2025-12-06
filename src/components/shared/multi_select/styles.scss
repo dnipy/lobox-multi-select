@@ -144,6 +144,15 @@
     flex-direction: column;
     gap: 5px;
     transition: all 0.4s ease-out;
+
+    &__notfound {
+      padding: 0px 10px;
+
+      &--text {
+        text-align: center;
+        font-size: 16px;
+      }
+    }
   }
 
   &__option {

@@ -21,20 +21,16 @@ export default function IndexPage() {
         </div>
 
         <div className="showcase__item">
+          <label>No Record</label>
+          <MultiSelect label="Default" options={[]} />
+        </div>
+
+        <div className="showcase__item">
           <label>With Placeholder</label>
           <MultiSelect
             label="Placeholder Test"
             placeholder="Choose something..."
             options={options}
-          />
-        </div>
-
-        <div className="showcase__item">
-          <label>Preselected Values</label>
-          <MultiSelect
-            label="Preselected"
-            options={options}
-            value={[options[0], options[2]]}
           />
         </div>
 
@@ -55,6 +51,15 @@ export default function IndexPage() {
         <div className="showcase__item">
           <label>Loading State</label>
           <MultiSelect label="Loading" options={options} loading />
+        </div>
+
+        <div className="showcase__item">
+          <label>Preselected Values</label>
+          <MultiSelect
+            label="Preselected"
+            options={options}
+            value={[options[0], options[2]]}
+          />
         </div>
       </div>
     </div>

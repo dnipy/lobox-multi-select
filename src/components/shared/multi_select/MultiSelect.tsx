@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, type FC } from "react";
+import { useState, useRef, useEffect, type FC, useCallback } from "react";
 import "./styles.scss";
 import type { IMultiSelectProps, IOption } from "./interfaces";
 import { MultiSelectDropDown } from "./DropDown";
@@ -20,41 +20,38 @@ const MultiSelect: FC<IMultiSelectProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // sync the inner-component options with options from parent
   useEffect(() => {
     setInternalOptions(options);
   }, [options]);
 
-  const handleAddNew = (label: string) => {
-    const newOption: IOption = { label, value: label };
-
-    if (!internalOptions.some((o) => o.value === newOption.value)) {
-      setInternalOptions([newOption, ...internalOptions]);
-    }
-
-    handleSelect(newOption);
-  };
-
+  // focus on input on open state
   useEffect(() => {
     if (isOpen) {
       inputRef.current?.focus();
     }
   }, [isOpen]);
 
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (
-        containerRef?.current &&
-        !containerRef?.current?.contains(e.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
+  // handler for outside click
+  const handleClickOutside = useCallback((e: MouseEvent) => {
+    if (
+      containerRef.current &&
+      !containerRef.current.contains(e.target as Node)
+    ) {
+      setIsOpen(false);
+    }
   }, []);
 
+  // handle outside click functionality
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [handleClickOutside]);
+
+  // open-close state
   const toggle = disabled || loading ? () => {} : () => setIsOpen((o) => !o);
 
+  // handle option select
   const handleSelect = (opt: IOption) => {
     if (disabled) return;
     const exists = internal.some((v) => v.value === opt.value);
@@ -70,12 +67,24 @@ const MultiSelect: FC<IMultiSelectProps> = ({
     onChange && onChange(updated);
   };
 
+  // handle option remove
   const handleRemove = (value: string) => {
     if (disabled) return;
     let updated = internal.filter((elm) => elm.value != value);
 
     setInternal(updated);
     onChange && onChange(updated);
+  };
+
+  // handle add new itm from input
+  const handleAddNew = (label: string) => {
+    const newOption: IOption = { label, value: `value-${Date.now()}` };
+
+    if (!internalOptions.some((o) => o.value === newOption.value)) {
+      setInternalOptions([newOption, ...internalOptions]);
+    }
+
+    handleSelect(newOption);
   };
 
   return (
