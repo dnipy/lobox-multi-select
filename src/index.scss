@@ -1,0 +1,32 @@
+body {
+  padding: 0;
+  margin: 0px;
+  font-family: sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+
+* {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #707070;
+    border-radius: 3px;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: #999;
+    }
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: #ccc #f0f0f0;
+}
