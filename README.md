@@ -14,11 +14,11 @@ A simple reusable multi-select dropdown built for the Lobox Front-end Developer 
 
 ## Provided Task Image
 
-![Task Image](https://github.com/dnipy/lobox-multi-select/blob/main/screenshots/task.jpeg)
+![Task Image](https://github.com/dnipy/lobox-multi-select/blob/main/screenshots/task.jpeg?raw=true)
 
 ## Preview Image
 
-![Task Image](https://github.com/dnipy/lobox-multi-select/blob/main/screenshots/previwe.png)
+![Task Image](https://github.com/dnipy/lobox-multi-select/blob/main/screenshots/preview.png?raw=true)
 
 ## Live Preview
 
